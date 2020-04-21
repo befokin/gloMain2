@@ -11,7 +11,9 @@ const foo = function (data, callback) {
 };
 
 const bar = function(dt, str) {
-    console.log(str, dt);
+    console.log(dt, str);
 };
 
-foo(123, bar);
+foo('привет', bar);
+
+
