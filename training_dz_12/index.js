@@ -41,11 +41,31 @@ let appData = {
     moneyDeposit: 0,
     start: function() {
         if(salaryAmount.value === '') {
-            // alert('Ошибка, поле "Месячный доход" должно быть заполнено!');
-            start.querySelector.addEventListener('click', function(event) {
+             start.querySelector.addEventListener('click', function(event) {
                 event.preventDefault();
             });
-        }
+        } 
+        
+        let  count;
+        count ++;
+        if(count === 1) {
+            start.remoteEventListener('click', clicked);
+            console.log('Произошел клик');
+        
+        // else {
+        //    let clicked = function() {
+        //     let  count;
+        //     count ++;
+        //     if(count === 1) {
+        //         start.remoteEventListener('click', clicked);
+        //         console.log('Произошел клик');
+                // start.addEventListener('click', function(event){
+                //     event.salaryAmount.textContent = '';
+                //     })
+                // }
+               
+            }
+        } 
 
         appData.budget = +salaryAmount.value;
             console.log('salaryAmount.value:  ', salaryAmount.value);
@@ -57,6 +77,8 @@ let appData = {
     appData.getAddIncome();
     appData.getAddExpenses();
     appData.getBudget();
+    appData.clicked();
+
     appData.showResult();
     console.log(this);
 },   
@@ -76,7 +98,6 @@ let appData = {
 },
 
 addExpensesBlock: function(){
-
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     expensesItems = document.querySelectorAll('.expenses-items');
@@ -84,12 +105,11 @@ addExpensesBlock: function(){
     if(expensesItems.length === 3) {
         expensesPlus.style.display = 'none';
     }
-    console.log(this);
+   
 },
 
 getExpenses: function(){
     expensesItems.forEach(function(item) {
-    
     let itemExpenses = item.querySelector('.expenses-title').value;
     let cashExpenses = item.querySelector('.expenses-amount').value;
     if(itemExpenses !== '' && cashExpenses !== ''){
@@ -99,7 +119,7 @@ getExpenses: function(){
 },
 
 addIncomeBlock: function(){
-        
+    console.log(this);
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
@@ -166,28 +186,39 @@ getStatusIncome: function() {
     if (appData.budgetDay >= 1200) {
         return ('У вас высокий уровень дохода');
 
-    } else if ((appData.budgetDay >= 600) && (appData.budgetDay <= 1200)) {
+    } else if ((this >= 600) && (this <= 1200)) {
                 return ('У вас средний уровень дохода');
 
-    } else if ((appData.budgetDay < 600) && (appData.budgetDay >= 0)) {
+    } else if ((this < 600) && (this >= 0)) {
                 return ('К сожалению у вас уровень дохода ниже среднего');
 
     } else {
             return('Что то пошло не так');
     } 
 },
+
+periodSelect: function() {
+    return   (periodAmount.textContent = periodSelect.value);
+},
+
+clicked: function() {
+    console.log(this);
+    let  count;
+    count ++;
+    if(count === 1) {
+        start.remoteEventListener('click', clicked)
+     
+        // start.addEventListener('click', function(event){
+        //     event.salaryAmount.textContent = '';
+        // })
+    }
+}
 };               
 
-// foo = this.start.bind(this);
-// foo();
-// appData.start();
 start.addEventListener('click', appData.start.bind(appData));
-expensesPlus.addEventListener('click', appData.addExpensesBlock);
-incomePlus.addEventListener('click', appData.addIncomeBlock); 
-
-periodSelect.addEventListener('input', function() {
-periodAmount.textContent = periodSelect.value;
-});
+expensesPlus.addEventListener('click', appData.addExpensesBlock.bind(appData));
+incomePlus.addEventListener('click', appData.addIncomeBlock.bind(appData)); 
+periodSelect.addEventListener('input', appData.periodSelect.bind(appData));
 
 appData.getTargetMonth();
 appData.getStatusIncome();
