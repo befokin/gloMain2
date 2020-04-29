@@ -1,6 +1,7 @@
 'use strict';
 
 let start = document.getElementById('start'),
+    cancel = document.getElementById('cancel'),
     btnPlus = document.getElementsByTagName('button'),
     incomePlus = btnPlus[0],
     expensesPlus = btnPlus[1],
@@ -45,13 +46,6 @@ let appData = {
                 event.preventDefault();
             });
         } 
-        
-        let  count;
-        count ++;
-        if(count === 1) {
-            start.remoteEventListener('click', clicked);
-            console.log('Произошел клик');
-        
         // else {
         //    let clicked = function() {
         //     let  count;
@@ -64,20 +58,21 @@ let appData = {
                 //     })
                 // }
                
-            }
-        } 
+            
+         
 
         appData.budget = +salaryAmount.value;
             console.log('salaryAmount.value:  ', salaryAmount.value);
    
 
+    appData.clicked();
     appData.getExpenses();
     appData.getIncome();
     appData.getExpensesMonth();
     appData.getAddIncome();
     appData.getAddExpenses();
     appData.getBudget();
-    appData.clicked();
+ 
 
     appData.showResult();
     console.log(this);
@@ -206,15 +201,22 @@ clicked: function() {
     let  count;
     count ++;
     if(count === 1) {
-        start.remoteEventListener('click', clicked)
-     
-        // start.addEventListener('click', function(event){
-        //     event.salaryAmount.textContent = '';
-        // })
-    }
+        start.remoteEventListener('click', clicked);
+        start = none;
+            // console.log('Ghjbpjitk rkbr');
+        start.addEventListener('click', function(event){
+                event.salaryAmount.textContent = '';
+        })
+   } 
+},
+cancel: function() {
+    
 }
 };               
 
+start.addEventListener('click', appData.clicked.bind(appData));
+
+cancel.addEventListener('click', appData.cancel.bind(appData));
 start.addEventListener('click', appData.start.bind(appData));
 expensesPlus.addEventListener('click', appData.addExpensesBlock.bind(appData));
 incomePlus.addEventListener('click', appData.addIncomeBlock.bind(appData)); 
