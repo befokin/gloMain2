@@ -31,6 +31,7 @@
 // //  нажму запомнить , закрою браузер, открою браузер, текст останется такойже в <p>
 // // таким образом, мы можем сохранять и получать данные из localStorage и sessionStorage
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 'use strict';
 
@@ -56,7 +57,9 @@
 
 // showText();
 
-'use strict';
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 'use strict';
 
 // document.cookie = 'имя=значение';
 // // чтобы сохранить необходимо строкой передать ключ и значение
@@ -64,6 +67,39 @@
 // document.cookie = 'имя2=значение2';
 // document.cookie = 'имя3=значение3';
 // document.cookie = 'имя=значение4';
+// // Cookie хранятся одну сессию
 
-console.log(document.cookie);
+// document.cookie = 'hope=life; expires=Tue, 7 May 2024 00:00:00 GMT';
+                                // ключ=значение      до этой даты будут храниться cookies
+
+// console.log(document.cookie);
 // чтобы вывести все cookie 
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+'use strict';
+
+function setCookie(key, value, year, month, day, path, domain, secure) {
+    // Описываем функцию. Создаем переменную, которая будет содержать временную строку  
+    let cookieStr = encodeURI(key) + '=' + encodeURI(value);
+    if(year) {
+        const expires = new Date(year, month-1, day);
+        cookieStr += '; expires=' + expires.toGMTString();
+        // закодировать encodeURI (значение),чтобы никто не прочитал важную информацию,
+        //  также надо закодировать key, path, domain
+    }
+    cookieStr += path ? '; path=' + encodeURI(path) : '';
+    cookieStr += domain ? '; domain' + encodeURI(domain) : '';
+    cookieStr += secure ? '; secure' : '';
+    // secure значение булиновое либо есть, либо нет
+
+    document.cookie = cookieStr;
+    // cookie это свойство document
+}
+
+setCookie('Привет', 'мир');
+setCookie('Любимый праздник детей', 'Новый год', 2021, 1, 1);
+// установим (добавим) новую cookie
+
+console.log(decodeURI(document.cookie));
+// расшифровать cookie
