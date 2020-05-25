@@ -199,7 +199,7 @@
 //             this.brand = brand;
 //             this.model = model;
 //             this.washed = false;
-//             this._services =services  // _ черточка для того чтобы не имели доступа из вне
+//             this._services =services  // _ черточка для того чтобы не имели доступа из вне (инкапсуляция)
 //       }
 
 //       static noCarBaseModel() {

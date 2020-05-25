@@ -29,7 +29,8 @@ let start = document.getElementById('start'),
     incomeItems = document.querySelectorAll('.income-items');
     
     
-const AppData = function() {
+class AppData {
+        constructor() {
     
         this.budget = 0;
         this.budgetDay = 0;
@@ -222,7 +223,7 @@ AppData.prototype.cancel = () => {
              
 AppData.prototype.eventListeners = () => {
 
-        cancel.addEventListener('click', cancel.bind(this));
+        cancel.addEventListener('click', this.cancel.bind(this));
         start.addEventListener('click', this.startAm.bind(this));
         expensesPlus.addEventListener('click', this.addExpensesBlock.bind(this));
         incomePlus.addEventListener('click', this.addIncomeBlock.bind(this)); 
