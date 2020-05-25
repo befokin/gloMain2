@@ -1,5 +1,5 @@
 'use strict';
-// Функция конструктор называем классом.
+// Функция конструктор называли классом.
 // В ES 6:
 
 // class Car {
@@ -199,7 +199,7 @@
 //             this.brand = brand;
 //             this.model = model;
 //             this.washed = false;
-//             this._services =services
+//             this._services =services  // _ черточка для того чтобы не имели доступа из вне
 //       }
 
 //       static noCarBaseModel() {

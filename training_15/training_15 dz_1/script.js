@@ -222,7 +222,7 @@ AppData.prototype.cancel = () => {
              
 AppData.prototype.eventListeners = () => {
 
-        cancel.addEventListener('click', this.cancel.bind(this));
+        cancel.addEventListener('click', cancel.bind(this));
         start.addEventListener('click', this.startAm.bind(this));
         expensesPlus.addEventListener('click', this.addExpensesBlock.bind(this));
         incomePlus.addEventListener('click', this.addIncomeBlock.bind(this)); 

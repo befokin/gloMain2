@@ -25,7 +25,7 @@
 // // mazda.color = 'blue';
 // delete mazda.color;
 
-// console.log(mazda);
+// console.log(mazda); // color: 'blue
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@
 // });
 
 // for (let key in mazda) {
-//       console.log(key, mazda[key]);
+//       console.log(key, mazda[key]);  // model 3, year 2006, color red
 // }
 
 // console.log(mazda);
