@@ -1,7 +1,7 @@
 
 'use strict';
 
-let start = document.getElementById('start'),
+const start = document.getElementById('start'),
     cancel = document.getElementById('cancel'),
     btnPlus = document.getElementsByTagName('button'),
     incomePlus = btnPlus[0],
@@ -30,7 +30,7 @@ let start = document.getElementById('start'),
     
     
 class AppData {
-        constructor() {
+        constructor(budget, budgetDay, budgetMonth, incomes, incomeMonth, addIncome, expenses, expensesMonth, addExpenses, deposit, percentDeposit, moneyDeposit) {
     
         this.budget = 0;
         this.budgetDay = 0;
@@ -47,7 +47,7 @@ class AppData {
 
 };
 
-AppData.prototype.start = () => {
+start = () => {
 
     this.budget = +salaryAmount.value;
 
@@ -61,7 +61,7 @@ AppData.prototype.start = () => {
 };
 // заносим методы
 
-AppData.prototype.showResult = () => {
+showResult = () => {
        
         budgetMonthValue.value = this.budgetMonth;
         budgetDayValue.value = this.budgetDay;
@@ -74,8 +74,8 @@ AppData.prototype.showResult = () => {
                 periodSelect.addEventListener('input', () => incomePeriodValue.value = this.calcPeriod());
 };
 
-AppData.prototype.addExpensesBlock = () => {
-        let cloneExpensesItem = expensesItems[0].cloneNode(true);
+addExpensesBlock = () => {
+        const cloneExpensesItem = expensesItems[0].cloneNode(true);
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -84,11 +84,11 @@ AppData.prototype.addExpensesBlock = () => {
         }
 };
 
-AppData.prototype.getExpenses = () => {
+getExpenses = () => {
 
         expensesItems.forEach((item) => {
-                let itemExpenses = item.querySelector('.expenses-title').value;
-                let cashExpenses = item.querySelector('.expenses-amount').value;
+                const itemExpenses = item.querySelector('.expenses-title').value;
+                const cashExpenses = item.querySelector('.expenses-amount').value;
 
                 if(itemExpenses !== '' && cashExpenses !== ''){
                         this.expenses[itemExpenses] = cashExpenses;
@@ -96,9 +96,9 @@ AppData.prototype.getExpenses = () => {
         });
 };
 
-AppData.prototype.addIncomeBlock = () => {
+addIncomeBlock = () => {
    
-        let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        const cloneIncomeItem = incomeItems[0].cloneNode(true);
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
         incomeItems = document.querySelectorAll('.income-items');
 
@@ -107,11 +107,11 @@ AppData.prototype.addIncomeBlock = () => {
         }
 };
 
-AppData.prototype.getIncome = function() {
+getIncome = function() {
     
         incomeItems.forEach ((item) => {
-                let itemIncomes = item.querySelector('.income-title').value;
-                let cashIncomes = item.querySelector('.income-amount').value;
+                const itemIncomes = item.querySelector('.income-title').value;
+                const cashIncomes = item.querySelector('.income-amount').value;
                 
                 if(itemIncomes !== '' && cashIncomes !== ''){
                         this.incomes[itemIncomes] = cashIncomes;
@@ -123,9 +123,9 @@ AppData.prototype.getIncome = function() {
         }
 };
 
-AppData.prototype.getAddExpenses = () => {
+getAddExpenses = () => {
         
-        let addExpenses = additionalExpensesItem.value.split(', ');
+        const addExpenses = additionalExpensesItem.value.split(', ');
 
         addExpenses.forEach((item) => {
                 item = item.trim();
@@ -136,10 +136,10 @@ AppData.prototype.getAddExpenses = () => {
         });
 };
 
-AppData.prototype.getAddIncome = function() {
+getAddIncome = function() {
    
         additionalIncomeItem.forEach((item) => {
-                let itemValue = item.value.trim();
+                const itemValue = item.value.trim();
 
                 if(itemValue !== '') {
                         this.addIncome.push(itemValue);
@@ -147,7 +147,7 @@ AppData.prototype.getAddIncome = function() {
         });
 };
 
-AppData.prototype.getExpensesMonth = () => {
+getExpensesMonth = () => {
 
         for (let key in this.expenses) {
                 this.expensesMonth += +this.expenses[key];
@@ -155,16 +155,16 @@ AppData.prototype.getExpensesMonth = () => {
         return;
 };
         
-AppData.prototype.getBudget = () => {
+getBudget = () => {
         this.budgetMonth  = this.incomeMonth - this.expensesMonth;
         this.budgetDay = Math.round(this.budgetMonth / 30);
 };
 
-AppData.prototype.getTargetMonth = () => targetAmount.value / this.budgetMonth;
+getTargetMonth = () => targetAmount.value / this.budgetMonth;
                         
-AppData.prototype.calcPeriod = () => this.budgetMonth * periodSelect.value;
+calcPeriod = () => this.budgetMonth * periodSelect.value;
 
-AppData.prototype.getStatusIncome = () => {
+getStatusIncome = () => {
         if (this.budgetDay >= 1200) {
                 return ('У вас высокий уровень дохода');
 
@@ -179,9 +179,9 @@ AppData.prototype.getStatusIncome = () => {
         } 
 };
 
-AppData.prototype.periodSelect = () => periodAmount.textContent = periodSelect.value;
+periodSelect = () => periodAmount.textContent = periodSelect.value;
 
-AppData.prototype.startAm = () => {
+startAm = () => {
         if(salaryAmount.value === '') {
                 alert('Вы не ввели месячный доход');
         } else if (log === false) {
@@ -192,14 +192,14 @@ AppData.prototype.startAm = () => {
         }
 };
 
-AppData.prototype.cancel = () => {
+cancel = () => {
         
         if(log === true) {
                 log = false;
                 cancel.style.display = 'none';
                 start.style.display = 'inline-block';
 
-                let stringCount = document.querySelectorAll('input');
+                const stringCount = document.querySelectorAll('input');
                         stringCount.forEach((item) => { 
                         item.value = '';
                         });
@@ -221,7 +221,7 @@ AppData.prototype.cancel = () => {
         }
 };
              
-AppData.prototype.eventListeners = () => {
+eventListeners = () => {
 
         cancel.addEventListener('click', this.cancel.bind(this));
         start.addEventListener('click', this.startAm.bind(this));
